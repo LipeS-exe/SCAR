@@ -9,7 +9,7 @@ Este projeto tem como objetivo desenvolver um sistema de controle de acesso para
 - **Docs**: Documentos de apoio como fluxogramas, banco de dados e design de telas.
 
 ## Tecnologias Utilizadas
-- React (Vite)
+- React (Vite) + Electron
 - FastAPI (Python)
 - PostgreSQL
 - Arduino C++
@@ -22,10 +22,17 @@ Este projeto tem como objetivo desenvolver um sistema de controle de acesso para
 
 ## Contribuição
 Cada membro deve trabalhar em sua branch:
--  frontend/**João Vitor Amaro**
-- backend/**Felipe Santos Rochas**
-- arduino/**José Eduardo Vigídio**
-- database/**Nicolas Vieira Batista**
+- frontend/**João Vitor Amaro**
+- backend/**Henrico taiete e Vitor Amorim**
+- arduino/**Felipe Santos Rocha**
+- database/**Nicolas Vieira Batista , Vinicius Silva e Thiago Gonçalves**
+- Docker/**Vinicius Caires Viel**
+- QA/**Vitor Amorim e Thiago Gonçalves**
+
+menção horonsa
+- **José Eduardo Vigídio**
+
+
 
 ## Atenção
 ### Como usar GitHub
