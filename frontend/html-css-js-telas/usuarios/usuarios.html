@@ -4,34 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-    <link rel="stylesheet" href="css/usuarios.css">
-    <link rel="shortcut icon" href="img/Scar.png" type="image/x-icon">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="usuarios.css">
 </head>
 <body page="lista">
-
-    <div class="container-head">
-        <img src="img/Scar.png" alt="">
-        <h2>SCAR ADMIN</h2>
-    </div>
     <div id="listaRegistros">
-
-            <div class="container-cabecalho">
-                <div class="f-pesquisa">
-                    <input placeholder="PESQUISAR" autofocus id="inputPesquisa" class="inputPesquisa">
-                </div>
-                <div class="user-menu">
-                    <div class="user" onclick="toggleMenu()">
-                        <i class="fi fi-rr-user" id="user"></i>
-                    </div>
-                    <ul class="menu">
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Configuração</a></li>
-                        <li><a href="#">Sair</a></li>
-                    </ul>
-                </div>
-            </div>
-
         <table>
             <thead>
                 <tr>
@@ -52,26 +28,30 @@
             <tbody id="listaRegistrosBody"></tbody>
         </table>
 
-        <div class="botao-adicionar">
-            <button onclick="visualizar('cadastro', true)">Adicionar</button>
+        <div>
+            <button onclick="visualizar('cadastro')">Adicionar</button>
         </div>
 
     </div>
 
     <form id="cadastroRegistros">
 
-        <div class="input-rfid">
-            <h2>RFID</h2>
-            <input type="text" id="rfid" placeholder="RFID do Colaborador">
+        <div class="label1">
+            <div>RFID</div>
+            <div>
+                <input type="text" placeholder="RFID Pessoal" id="rfid">
+            </div>
         </div>
 
-        <div class="input-Nome">
-            <h2>Nome</h2>
-            <input type="text" id="nome" placeholder="Nome do Colaborador">
+        <div class="label">
+            <div>Nome</div>
+            <div>
+                <input type="text" placeholder="Nome Completo" id="nome">
+            </div>
         </div>
 
-        <div class="input-especializacao">
-            <h2>Especialização</h2>
+        <div class="label">
+            <div>Especialização</div>
             <div>
                 <form>
                 <select name="especializacao" id="especi">
@@ -84,8 +64,8 @@
             </div>
         </div>
 
-        <div class="input-turno">
-            <h2>Turno</h2>
+        <div class="label">
+            <div>Turno</div>
             <div>
                 <select name="turno" id="turno">
                     <option value="Manhã">Manhã</option>
@@ -97,7 +77,7 @@
 
         <div class="buttons">
             <button>Cadastrar</button>
-            <button onclick="visualizar('lista')" type="button" class="botao-cancelar">Cancelar</button>
+            <button onclick="visualizar('lista')" type="button">Cancelar</button>
         </div>
 
     </form>

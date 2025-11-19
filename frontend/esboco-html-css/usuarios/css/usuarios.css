@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+#listaRegistros{display: none;}
+#cadastroRegistros{display: none;}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family:"Roboto", sans-serif;;
+}
+
+/*Cabeçalho do site: imagem Scar, Texto SCAR ADMIN*/
+.container-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+img {
+    width: 100px;
+}
+
+.container-head h2 {
+    color: white;
+}
+
+/*Corpo do Site: Lista Registro, Cadastro Registro*/
+
+body[page=lista] #listaRegistros{
+    display: block;
+    padding-top: 10px;
+}
+body[page=cadastro] #cadastroRegistros{
+    display: block;
+}
+
+body {
+    font-size: 13px;
+    background-color: #181F28;
+}
+
+/*Estilo da Lista de Registros de Usuários*/
+#listaRegistros {
+    width: 1200px;
+    height: 600px;
+    background-color: white;
+    margin: 0 auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*Estilo do Cadastro de Registros*/
+#cadastroRegistros {
+    width: 500px;
+    height: 520px;
+    background-color: white;
+    margin: 40px auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/*Tabela da Lista de Registro de Usuarios*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    font-size: 14px;
+    padding: 5px 15px;
+    border: 1px solid #000000;
+    text-align: center;
+
+}
+
+/*Botões: Adicionar, Cancelar, Deletar, Editar, Cadastrar*/
+/*Configuração dos Botões*/
+button {
+    width: 180px;
+    height: 38px;
+    border: 1px rgba(0, 0, 0, 0.336) solid;
+    border-radius: 16px;
+    font-weight: bold;
+    margin: 10px;
+    background: transparent;
+}
+
+button:hover {
+    background-color: #292929;
+    color: white;
+    border: none;
+    transition: .6s;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/*Botão adicionar*/
+.botao-adicionar button {
+    width: 200px;
+    height: 40px;
+    border: 1px rgba(0, 0, 0, 0.336) solid;
+    border-radius: 16px;
+    font-weight: bold;
+    margin: 10px;
+   
+}
+
+.botao-adicionar {
+    text-align: center;
+}
+
+/*Botão Cancelar*/
+.botao-cancelar:hover {
+    background-color: #a00;
+    color: white;
+    border: none;
+}
+
+/*Botão editar*/
+button.editar {
+    background: transparent;
+    width: 160px;
+    height: 30px;
+}
+
+button.editar:hover {
+    background-color: #292929;
+    color: white;
+}
+
+/*Botão Deletar*/
+button.deletar {
+    background: transparent;
+    width: 160px;
+    height: 30px;
+}
+
+button.deletar:hover {
+    background-color: #a00;
+    color: white;
+}
+
+.buttons {
+    padding: 40px;
+}
+
+/*Input do Cadastro Registro*/
+input {
+    width: 220px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.336);
+    border-radius: 15px;
+    padding: 0 1rem;
+}
+
+
+/*Select dos inputs Cadastro Registros*/
+select {
+    width: 250px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.336);
+    border-radius: 15px;
+    text-align: center;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+
+/*Inputs do Cadastro Registro: RFID , Nome, Especialização, Turno*/
+.input-rfid {
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.input-nome, .input-especializacao, .input-turno {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+
+
+/*Cabeçalho Usuario e Pesquisa*/
+
+.container-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 800px;            
+  width: 100%;
+  padding: 10px;
+}
+
+/*Input de Pesquisa - container-cabecalho*/
+
+.inputPesquisa {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 250px;
+  height: 30px;
+  max-width: 90vw;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/*User menu*/
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.user i {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.user i:hover {
+  background: #f0f0f0;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  list-style: none;
+  padding: 8px 0;
+  min-width: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.menu li a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.menu li a:hover {
+  background: #f5f5f5;
+}
+
+.menu.show {
+  display: block;
+}
