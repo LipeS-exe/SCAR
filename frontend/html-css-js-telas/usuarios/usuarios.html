@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="usuarios.css">
+</head>
+<body page="lista">
+    <div id="listaRegistros">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        RFID
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Especialização
+                    </th>
+                    <th>
+                        Turno
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="listaRegistrosBody"></tbody>
+        </table>
+
+        <div>
+            <button onclick="visualizar('cadastro')">Adicionar</button>
+        </div>
+
+    </div>
+
+    <form id="cadastroRegistros">
+
+        <div class="label1">
+            <div>RFID</div>
+            <div>
+                <input type="text" placeholder="RFID Pessoal" id="rfid">
+            </div>
+        </div>
+
+        <div class="label">
+            <div>Nome</div>
+            <div>
+                <input type="text" placeholder="Nome Completo" id="nome">
+            </div>
+        </div>
+
+        <div class="label">
+            <div>Especialização</div>
+            <div>
+                <form>
+                <select name="especializacao" id="especi">
+                    <option value="Segurança">Segurança</option>
+                    <option value="Secretaria">Secretário(a)</option>
+                    <option value="Recepcionista">Recepcionista</option>
+                    <option value="Médico">Médico(a)</option>
+                    <option value="Cirurgião">Cirurgião</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="label">
+            <div>Turno</div>
+            <div>
+                <select name="turno" id="turno">
+                    <option value="Manhã">Manhã</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noite">Noite</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button>Cadastrar</button>
+            <button onclick="visualizar('lista')" type="button">Cancelar</button>
+        </div>
+
+    </form>
+</body>
+<script src="usuarios.js"></script>
+</html>
