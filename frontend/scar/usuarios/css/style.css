@@ -262,3 +262,73 @@ select:hover {
 .menu.show {
   display: block;
 }
+
+/*mediaa screen - parte responsiva*/
+
+@media screen and (max-width: 1200px) {
+
+    #listaRegistros {
+        width: 95%;
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    #cadastroRegistros {
+        width: 90%;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .container-cabecalho {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inputPesquisa {
+        width: 90%;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px;
+    }
+
+    .botao-adicionar button {
+        width: 120px;
+        height: 45px;
+    }
+
+    input, select {
+        width: 85%;
+        max-width: 300px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .buttons button {
+        width: 120px;
+    }
+
+    .container-head img {
+        width: 70px;
+    }
+
+    .container-head h2 {
+        font-size: 22px;
+    }
+}

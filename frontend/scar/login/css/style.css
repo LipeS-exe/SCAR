@@ -129,3 +129,10 @@ h1 {
         margin: auto;
     }
 }
+
+.mensagem {
+    text-align: center;
+    background-color: rgba(255, 118, 118, 0.534);
+    color: red;
+    border-radius: 20px;
+}
