@@ -9,15 +9,9 @@ Este projeto tem como objetivo desenvolver um sistema de controle de acesso para
 - **Docs**: Documentos de apoio como fluxogramas, banco de dados e design de telas.
 
 ## Tecnologias Utilizadas
-<<<<<<< HEAD
 - HTML, CSS e JavaScript
 - FastAPI (Python) Ou PHP
 - MySQL
-=======
-- React (Vite) + Electron
-- FastAPI (Python)
-- PostgreSQL
->>>>>>> cdef529e0ac9bddc38361b4e7ade8327d87eb44b
 - Arduino C++
 - Docker
 
@@ -30,25 +24,13 @@ Este projeto tem como objetivo desenvolver um sistema de controle de acesso para
 Cada membro deve trabalhar em sua branch:
 - frontend/**João Vitor Amaro**
 - backend/**Henrico taiete e Vitor Amorim**
-<<<<<<< HEAD
 - arduino/**Felipe Santos Rocha e Thiago Gonçalves**
 - database/**Nicolas Vieira Batista e Vinicius Silva**
 - Docker/**Vinicius Caires Viel e Vitor Amorim**
 
-=======
-- arduino/**Felipe Santos Rocha**
-- database/**Nicolas Vieira Batista , Vinicius Silva e Thiago Gonçalves**
-- Docker/**Vinicius Caires Viel**
-- QA/**Vitor Amorim e Thiago Gonçalves**
->>>>>>> cdef529e0ac9bddc38361b4e7ade8327d87eb44b
 
 menção horonsa
 - **José Eduardo Vigídio**
-
-<<<<<<< HEAD
-=======
-
->>>>>>> cdef529e0ac9bddc38361b4e7ade8327d87eb44b
 
 ## Atenção
 ### Como usar GitHub
