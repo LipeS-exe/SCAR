@@ -1,148 +1,165 @@
-const KEY_BD = '@usuariosestudo'
+var FILTRO = '';
+var listaRegistros = [];
 
-var listaRegistros = {
-    ultimoIdGerado: 0,
-    usuarios: []
-}
-
-var FILTRO = ''
-
-function gravarBD() {
-    localStorage.setItem(KEY_BD, JSON.stringify(listaRegistros))
-}
-
-function lerBD() {
-    const data = localStorage.getItem(KEY_BD)
-    if (data) {
-        listaRegistros = JSON.parse(data)
+// ==========================
+// LISTAR DADOS
+// ==========================
+async function carregarRegistros() {
+    try {
+        const resposta = await fetch("api/listar.php");
+        if (!resposta.ok) throw new Error("Erro ao listar registros");
+        listaRegistros = await resposta.json();
+        desenhar();
+    } catch (err) {
+        alert(err.message);
+        console.error(err);
     }
-    desenhar()
 }
 
+// ==========================
+// PESQUISA
+// ==========================
 function pesquisar(value) {
-    FILTRO = value
-    desenhar()
+    FILTRO = value;
+    desenhar();
 }
 
+// ==========================
+// DESENHAR TABELA
+// ==========================
 function desenhar() {
-    const tbody = document.getElementById('listaRegistrosBody')
-    if (tbody) {
-        let data = listaRegistros.usuarios
+    const tbody = document.getElementById("listaRegistrosBody");
+    if (!tbody) return;
 
-        if (FILTRO.trim()) {
-            const expReg = new RegExp(FILTRO.trim().replace(/[^\d\w]+/g, '.*'), 'i')
-            data = data.filter(usuario => {
-                return expReg.test(usuario.nome) || expReg.test(usuario.rfid)
-            })
+    let data = listaRegistros;
+
+    if (FILTRO.trim()) {
+        const exp = new RegExp(FILTRO.trim(), "i");
+        data = data.filter(u => exp.test(u.nome) || exp.test(u.rfid));
+    }
+
+    tbody.innerHTML = data.map(usuario => `
+        <tr>
+            <td>${usuario.rfid}</td>
+            <td>${usuario.nome}</td>
+            <td>${usuario.especi}</td>
+            <td>${usuario.turno}</td>
+            <td>
+                <button class='editar' onclick='editarRegistro(${usuario.id})'>Editar</button>
+                <button class='deletar' onclick='perguntarSeDeleta(${usuario.id})'>Deletar</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+// ==========================
+// SALVAR = CADASTRAR OU EDITAR
+// ==========================
+async function salvarRegistro() {
+    const id = document.getElementById("id_edit").value;
+    const rfid = document.getElementById("rfid").value.trim();
+    const nome = document.getElementById("nome").value.trim();
+    const especi = document.getElementById("especi").value;
+    const turno = document.getElementById("turno").value;
+
+    if (!rfid || !nome) {
+        alert("RFID e Nome são obrigatórios!");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("rfid", rfid);
+    formData.append("nome", nome);
+    formData.append("especi", especi);
+    formData.append("turno", turno);
+
+    const url = id ? "api/editar.php" : "api/cadastrar.php";
+
+    try {
+        const resposta = await fetch(url, { method: "POST", body: formData });
+        const data = await resposta.json();
+
+        if (data.status !== "ok") {
+            alert("Erro: " + (data.msg || "Não foi possível salvar"));
+            return;
         }
 
-        data = data
-            .sort((a, b) => a.nome.localeCompare(b.nome))
-            .map(usuario => {
-                return `
-                    <tr>
-                        <td>${usuario.rfid}</td>
-                        <td>${usuario.nome}</td>
-                        <td>${usuario.especi}</td>
-                        <td>${usuario.turno}</td>
-                        <td>
-                            <button class='editar' onclick='visualizar("cadastro", false, "${usuario.rfid}")'>Editar</button>
-                            <button class='deletar' onclick='perguntarSeDeleta("${usuario.rfid}")'>Deletar</button>
-                        </td>
-                    </tr>`
-            })
-
-        tbody.innerHTML = data.join('')
+        visualizar('lista');
+        carregarRegistros();
+    } catch (err) {
+        alert("Erro ao salvar registro");
+        console.error(err);
     }
 }
 
-function insertUsuario(rfid, nome, especi, turno) {
-    const id = listaRegistros.ultimoIdGerado + 1
-    listaRegistros.ultimoIdGerado = id
-    listaRegistros.usuarios.push({
-        rfid, nome, especi, turno
-    })
-    gravarBD()
-    desenhar()
-    visualizar('lista')
+// ==========================
+// EDITAR
+// ==========================
+function editarRegistro(id) {
+    const u = listaRegistros.find(x => x.id == id);
+    if (!u) return;
+
+    document.body.setAttribute("page", "cadastro");
+
+    document.getElementById("id_edit").value = u.id;
+    document.getElementById("rfid").value = u.rfid;
+    document.getElementById("nome").value = u.nome;
+    document.getElementById("especi").value = u.especi;
+    document.getElementById("turno").value = u.turno;
 }
 
-function editUsuario(rfid, nome, especi, turno) {
-    const usuario = listaRegistros.usuarios.find(u => u.rfid == rfid)
-    if (usuario) {
-        usuario.nome = nome
-        usuario.especi = especi
-        usuario.turno = turno
-        gravarBD()
-        desenhar()
-        visualizar('lista')
-    }
-}
+// ==========================
+// DELETAR
+// ==========================
+async function perguntarSeDeleta(id) {
+    if (!confirm("Deseja deletar o registro ID " + id + "?")) return;
 
-function deleteUsuario(rfid) {
-    listaRegistros.usuarios = listaRegistros.usuarios.filter(u => u.rfid != rfid)
-    gravarBD()
-    desenhar()
-}
+    const formData = new FormData();
+    formData.append("id", id);
 
-function perguntarSeDeleta(rfid) {
-    if (confirm('Quer deletar o registro de RFID ' + rfid + '?')) {
-        deleteUsuario(rfid)
-    }
-}
+    try {
+        const resposta = await fetch("api/excluir.php", { method: "POST", body: formData });
+        const data = await resposta.json();
 
-function limparEdicao() {
-    document.getElementById('rfid').value = ''
-    document.getElementById('nome').value = ''
-    document.getElementById('especi').value = ''
-    document.getElementById('turno').value = ''
-}
-
-function visualizar(pagina, novo = false, rfid = null) {
-    document.body.setAttribute('page', pagina)
-
-    if (pagina === 'cadastro') {
-        if (novo) limparEdicao()
-
-        if (rfid) {
-            const usuario = listaRegistros.usuarios.find(u => u.rfid == rfid)
-            if (usuario) {
-                document.getElementById('rfid').value = usuario.rfid
-                document.getElementById('nome').value = usuario.nome
-                document.getElementById('especi').value = usuario.especi
-                document.getElementById('turno').value = usuario.turno
-            }
+        if (data.status !== "ok") {
+            alert("Erro: " + (data.msg || "Não foi possível deletar"));
+            return;
         }
 
-        document.getElementById('rfid').focus()
+        carregarRegistros();
+    } catch (err) {
+        alert("Erro ao deletar registro");
+        console.error(err);
     }
 }
 
-function submeter(e) {
-    e.preventDefault()
-    const data = {
-        rfid: document.getElementById('rfid').value,
-        nome: document.getElementById('nome').value,
-        especi: document.getElementById('especi').value,
-        turno: document.getElementById('turno').value,
-    }
+// ==========================
+// MOSTRAR TELAS
+// ==========================
+function visualizar(pagina, novo = false) {
+    document.body.setAttribute("page", pagina);
 
- 
-    const usuarioExistente = listaRegistros.usuarios.find(u => u.rfid == data.rfid)
-
-    if (usuarioExistente) {
-        editUsuario(data.rfid, data.nome, data.especi, data.turno)
-    } else {
-        insertUsuario(data.rfid, data.nome, data.especi, data.turno)
+    if (pagina === "cadastro" && novo) {
+        document.getElementById("id_edit").value = "";
+        document.getElementById("rfid").value = "";
+        document.getElementById("nome").value = "";
+        document.getElementById("especi").value = "";
+        document.getElementById("turno").value = "";
     }
 }
 
+// ==========================
+// MENU SUPERIOR
+// ==========================
 function toggleMenu() {
-  document.querySelector('.menu').classList.toggle('show');
+    document.querySelector('.menu').classList.toggle('show');
 }
 
-window.addEventListener('load', () => {
-    lerBD()
-    document.getElementById('cadastroRegistros').addEventListener('submit', submeter)
-    document.getElementById('inputPesquisa').addEventListener('keyup', e => pesquisar(e.target.value))
-})
+// ==========================
+// INICIALIZAÇÃO
+// ==========================
+window.addEventListener("load", () => {
+    carregarRegistros();
+    document.getElementById('inputPesquisa').addEventListener('keyup', e => pesquisar(e.target.value));
+});
